@@ -1,0 +1,28 @@
+client, client_addr = s.accept()
+    raw_request = client.recv(1024)
+
+    print("Request received")
+    request = RequestParser(raw_request)
+    print(request.method, request.url, request.get_action())
+    for key in request.data():
+        print(key, request.data()[key])
+        color = request.data()[key]
+        if color == "off":
+            set_rgb(0, 0, 0)
+        if color == "red":
+            set_rgb(100, 0, 0)
+        if color == "blue":
+            set_rgb(0, 0, 100)
+        if color == "green":
+            set_rgb(0, 100, 0)
+        if color == "magenta":
+            set_rgb(100, 0, 100)
+        if color == "yellow":
+            set_rgb(200, 1, 0)
+        if color == "cyan":
+            set_rgb(0, 100, 100)
+
+    client.send("HTTP/1.1 200 OK\r\n\r\nRequest Received\r\n")
+    client.close()
+    print("Request closed")
+    print("Color: {}".format(color),)
