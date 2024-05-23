@@ -4,18 +4,68 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<link rel="stylesheet" href="./web/wifi.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script type="importmap">
+			{
+				"imports": {
+					"@material/web/": "https://esm.run/@material/web/"
+				}
+			}
+		</script>
+		<script type="module">
+			import "@material/web/all.js";
+			import { styles as typescaleStyles } from "@material/web/typography/md-typescale-styles.js";
+
+			document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+		</script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="./web/wifi.js" defer></script>
 	</head>
 	<body>
-		<form
-			method="post"
-			action="/api/v1/config/wifi"
-			enctype="multipart/form-data"
-		>
-			<label for="ssid">SSID</label><br />
-			<input type="text" name="ssid" placeholder="SSID" /><br />
-			<label for="password">Password</label><br />
-			<input type="password" name="password" placeholder="Password" /><br />
-			<button type="submit">Submit</button>
-		</form>
+		<div class="w-screen h-screen bg-slate-500 grid">
+			<form
+				id="wifi-form"
+				class="w-1/2 min-h-max flex flex-col p-8 bg-slate-300 justify-center items-center place-self-center"
+			>
+				<div class="m-2">
+					<h1 class="text-2xl">Wifi Configuration</h1>
+				</div>
+				<div class="w-2/3 flex flex-row justify-between m-2">
+					<label for="ssid">SSID:</label>
+					<select class="w-1/2" id="ssid" name="ssid"></select
+					><br />
+				</div>
+				<div>
+					<h2>OR</h2>
+				</div>
+				<div class="w-2/3 flex flex-row justify-between m-2">
+					<label for="ssid-alt">SSID:</label>
+					<input
+						class="w-1/2"
+						type="text"
+						name="ssid-alt"
+						id="ssid-alt"
+						placeholder="SSID"
+					/><br />
+				</div>
+				<div class="w-2/3 flex flex-row justify-between m-2">
+					<label for="password">Password:</label>
+					<input
+						class="w-1/2"
+						type="password"
+						name="password"
+						id="password"
+						placeholder="Password"
+					/><br />
+				</div>
+				<div class="m-2">
+					<button type="button" id="submit-btn">Submit</button>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

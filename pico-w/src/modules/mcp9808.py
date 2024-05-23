@@ -19,3 +19,4 @@ class MCP9808:
         temp_c = self.read_temp_c()
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_f
+

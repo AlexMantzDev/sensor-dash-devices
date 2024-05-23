@@ -43,6 +43,8 @@ class RequestParser:
                 while line_num < len(request_lines) and len(request_lines[line_num]) != 0:
                     header, value = self.parse_header_line(request_lines[line_num])
                     if header:
+                        # Convert header name to lowercase
+                        header = header.lower()
                         self.headers[header] = value
                     line_num += 1
 
@@ -57,8 +59,10 @@ class RequestParser:
                 self.content = request_lines[line_num:]
 
                 # handle content depending on Content-Type header
-                content_type = self.get_header_value('Content-Type')
+                content_type = self.get_header_value('content-type')
                 if content_type:
+                    # Convert content type to lowercase
+                    content_type = content_type.lower()
                     # filter out form submissions
                     if content_type.find('multipart/form-data') != -1:
                         # data is in multipart/form-data format
@@ -276,3 +280,5 @@ class RequestParser:
                 return False
         else:
             return False
+
+
